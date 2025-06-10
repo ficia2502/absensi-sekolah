@@ -1,14 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel QR Code Attendance System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based attendance system that uses QR codes to allow users to clock in and out efficiently. Ideal for schools, offices, and events.
 
-Ini adalah aplikasi untuk kebutuhan Absensi sekolah SMA. Aplikasi Absensi ini menggunakan Handphone sebagai perangkat absennya, dan menggunakan fitur kamera. Dimana kamera di arahkan ke QR Code yang telah di cetak dalam bentuk kartu (QR Code setiap siswa di buat di dalam aplikasi ini).
+## 🚀 Features
 
-Framework UI yang digunakan menggunakan AdminLTE.
+- User check-in/check-out via QR code
+- Unique QR code generation for each user
+- Admin dashboard with attendance reports
+- Daily, weekly, and monthly analytics
+- Email notifications (optional)
+- Role-based access control (Admin/User)
 
-Aplikasi ini di bangun menggunakan Laravel 10 dengan versi PHP minimal 8.1.0.
+## 🛠 Tech Stack
+
+- Laravel 10+
+- MySQL / PostgreSQL
+- Blade Templating
+- Laravel QR Code (Simple QrCode)
+- Laravel Breeze (Authentication)
+- Tailwind CSS (optional UI framework)
+
+---
+
+## 📦 Installation
+
+### Prerequisites
+
+- PHP >= 8.1
+- Composer
+- MySQL or PostgreSQL
+- Node.js & npm (for assets)
+- Git
+
+### Steps
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/laravel-qrcode-attendance.git
+
+cd laravel-qrcode-attendance
+
+# Install dependencies
+composer install
+
+# Copy .env and generate app key
+cp .env.example .env
+php artisan key:generate
+
+# Configure your .env with DB credentials
+
+# Run migrations and seeders
+php artisan migrate --seed
+
+# Install front-end dependencies
+npm install && npm run dev
+
+# Start local development server
+php artisan serve
