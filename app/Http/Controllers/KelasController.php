@@ -138,7 +138,6 @@ class KelasController extends Controller
 
         // Hapus data Murid sesuai dengan id-nya
         $validasi = $request->validate([
-            'captcha' => 'required|captcha'
         ]);
             if($validasi)
             {

@@ -365,11 +365,9 @@
                             <p class="text-danger">Hapus : <b>{{ $murid->nama }}</b></p>
                             <p class="text-danger"><i>Perhatian! Menghapus data siswa tidak dapat di undur! Apabila kamu
                                     sudah mengisi Absensi dengan data siswa ini sebelumnya, maka data absensi untuk siwa ini
-                                    akan hilang permanen! Apabila kamu sudah mengerti tentang resiko ini, maka silahkan isi
-                                    Captcha di bawah dan klik Submit.</i></p>
+                                    akan hilang permanen! Apabila kamu sudah mengerti tentang resiko ini, maka silahkan klik Submit.</i></p>
                             <hr>
-                            {!! captcha_img() !!}
-                            <span><input type="text" name="captcha" placeholder="Masukkan captcha" required></span>
+                            <span><input type="hidden" name="captcha" value="bypass"></span>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">

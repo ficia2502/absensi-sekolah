@@ -119,14 +119,13 @@
                                 <p class="text-danger"><i>Perhatian! Menghapus data tahun dapat menyebabkan <b>KERUSAKAN
                                             DATA SECARA PERMANEN</b>!. Harap diskusikan terlebih dahulu kepada pihak
                                         pengembang atau pihak pengelola pada sekolah anda!. Jika anda sudah yakin akan
-                                        tindakan anda, maka harap isi Captcha di bawah dan klik "Saya Yakin!"
+                                        tindakan anda, maka klik "Saya Yakin!"
                                         <br>
                                         <br>
                                         <b>Pihak pengembang tidak bertanggung jawab atas kerusakan data yang di sebabkan
                                             menghapus data kelas ini!</b></i></p>
                                 <hr>
-                                {!! captcha_img() !!}
-                                <span><input type="text" name="captcha" placeholder="Masukkan captcha" required></span>
+                                <span><input type="hidden" name="captcha" value="bypass"></span>
                             </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">

@@ -146,11 +146,11 @@ class MuridController extends Controller
 
         // Hapus data Murid sesuai dengan id-nya
         $validasi = $request->validate([
-            'captcha' => 'required|captcha'
+            // 'captcha' => 'required|captcha'
         ]);
         
-            if ($validasi) {  
-                Murid::where('id', $getId)->delete();         
+            if ($validasi) {
+                Murid::where('id', $getId)->delete();
                 return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus!.');              
             } 
             
