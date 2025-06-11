@@ -40,4 +40,27 @@ class TahunController extends Controller
 
         return redirect('/tahun')->with('success','');
     }
+
+    public function destroy(Request $request)
+    {
+        // Verifikasi untuk User yang login apakah dia Admin
+        $verifikasiAdmin = new IsAdmin();
+        $verifikasiAdmin->isAdmin(); 
+        
+        $getId = $request->id;
+
+        try {
+            $tahun = Tahun::findOrFail($getId);
+            
+            // Delete all related murids (cascade will handle absensis)
+            Murid::where('tahun_id', $getId)->delete();
+            
+            // Delete the tahun
+            $tahun->delete();
+            
+            return redirect('/tahun')->with('deleted', 'Tahun ajaran berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect('/tahun')->with('fail', 'Gagal menghapus tahun ajaran: ' . $e->getMessage());
+        }
+    }
 }

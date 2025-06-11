@@ -13,10 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create admin user first
         \App\Models\User::factory(1)->create();
+
+        // Create kelas and tahun first since murids depend on them
+        \App\Models\Kelas::factory(1)->create();
+        \App\Models\Tahun::create([
+            'tahun' => '2023',
+        ]);
+
+        // Now create murids which depend on kelas and tahun
         \App\Models\Murid::factory(50)->create();
         //\App\Models\Absensi::factory(1000)->create();
-        \App\Models\Kelas::factory(1)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -126,7 +126,7 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kelas $kelas, Request $request)
+    public function destroy(Request $request)
     {
         // Verifikasi untuk User yang login apakah dia Admin
             $verifikasiAdmin = new IsAdmin();
@@ -136,18 +136,21 @@ class KelasController extends Controller
         
         $getId = $request->id;
 
-        // Hapus data Murid sesuai dengan id-nya
-        $validasi = $request->validate([
-        ]);
-            if($validasi)
-            {
-                Kelas::where('id', $getId)->delete(); 
+        try {
+            $kelas = Kelas::findOrFail($getId);
             
-                return redirect('/kelas/daftar')->with('deleted', '');            
-            }
-
-            else {
-                return redirect('/kelas/daftar/'.$getId)->with('fail', 'Kelas gagal di hapus.');
-            }        
+            // Delete all related absensis records (although cascade should handle this)
+            Absensi::where('kelas_id', $getId)->delete();
+            
+            // Delete all related murids (cascade will handle absensis)
+            Murid::where('kelas_id', $getId)->delete();
+            
+            // Delete the kelas
+            $kelas->delete();
+            
+            return redirect('/kelas/daftar')->with('deleted', 'Kelas berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect('/kelas/daftar')->with('fail', 'Gagal menghapus kelas: ' . $e->getMessage());
+        }
     }
 }

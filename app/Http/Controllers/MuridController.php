@@ -137,26 +137,23 @@ class MuridController extends Controller
     public function destroy(Request $request)
     {
         // Verifikasi untuk User yang login apakah dia Admin
-            $verifikasiAdmin = new IsAdmin();
-            $verifikasiAdmin->isAdmin(); 
-        // Jika status=1, maka akan lanjut kode di bawah
-        // Jika status != 1, maka akan 403 Forbidden
+        $verifikasiAdmin = new IsAdmin();
+        $verifikasiAdmin->isAdmin(); 
         
         $getId = $request->murid;
 
-        // Hapus data Murid sesuai dengan id-nya
-        $validasi = $request->validate([
-            // 'captcha' => 'required|captcha'
-        ]);
-        
-            if ($validasi) {
-                Murid::where('id', $getId)->delete();
-                return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus!.');              
-            } 
+        try {
+            $murid = Murid::findOrFail($getId);
             
-            return redirect('/detail-murid/'.$getId)->with('fail', '');
-
+            // Delete related absensis records first (although cascade should handle this)
+            Absensi::where('murid_id', $getId)->delete();
             
-           
+            // Delete the murid
+            $murid->delete();
+            
+            return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus!');
+        } catch (\Exception $e) {
+            return redirect('/detail-murid/'.$getId)->with('fail', 'Gagal menghapus data murid: ' . $e->getMessage());
+        }
     }
 }
