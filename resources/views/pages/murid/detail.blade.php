@@ -11,6 +11,44 @@
 
 @section('content')
     <!-- Main content -->
+    @if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('#profile form');
+        form.addEventListener('submit', function(e) {
+            const nama = document.getElementById('nama').value.trim();
+            const kelas = document.getElementById('kelas').value;
+            const tahun = document.getElementById('tahun').value;
+            
+            if (nama.length < 3) {
+                e.preventDefault();
+                alert('Nama harus memiliki minimal 3 karakter');
+                return;
+            }
+
+            if (!kelas || !tahun) {
+                e.preventDefault(); 
+                alert('Kelas dan Tahun harus dipilih');
+                return;
+            }
+        });
+    });
+    </script>
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -67,7 +105,7 @@
 
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
 
-                            <p class="text-muted">Jalan Setenan Tengah Nomor 8, Ungaran</p>
+                            <p class="text-muted">JL. PELABUHAN NO. 381 KALIBUNTU KRAKSAAN PROBOLINGGO 67282</p>
 
                         </div>
                         <!-- /.card-body -->
@@ -188,32 +226,30 @@
                                 </div>
 
                                 <div class="tab-pane" id="profile">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="/edit-murid/{{ $murid->id }}" method="POST">
                                         @csrf
                                         <div class="form-group row">
                                             <label for="inputNis" class="col-sm-2 col-form-label">NIS</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="nis"
+                                                <input type="text" class="form-control" id="nis" name="nis"
                                                     placeholder="NIS" value="{{ $murid->nis }}" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Nama Lengkap</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="nama"
+                                                <input type="text" class="form-control" id="nama" name="nama"
                                                     placeholder="Nama Lengkap" value="{{ $murid->nama }}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputKelas" class="col-sm-2 col-form-label">Kelas</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="kelas" name="kelas">
+                                                <select class="form-control" id="kelas" name="kelas_id">
                                                     @foreach ($kelas as $k)
-                                                        @if ($k->kelas === $murid->kelas->kelas)
-                                                            <option selected>{{ $k->kelas }}</option>
-                                                        @else
-                                                            <option>{{ $k->kelas }}</option>
-                                                        @endif
+                                                        <option value="{{ $k->id }}" {{ $k->id == $murid->kelas_id ? 'selected' : '' }}>
+                                                            {{ $k->kelas }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -221,13 +257,11 @@
                                         <div class="form-group row">
                                             <label for="inputTahun" class="col-sm-2 col-form-label">Tahun</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="tahun" name="tahun">
+                                                <select class="form-control" id="tahun" name="tahun_id">
                                                     @foreach ($tahun as $t)
-                                                        @if ($t->tahun === $murid->tahun->tahun)
-                                                            <option selected>{{ $t->tahun }}</option>
-                                                        @else
-                                                            <option>{{ $t->tahun }}</option>
-                                                        @endif
+                                                        <option value="{{ $t->id }}" {{ $t->id == $murid->tahun_id ? 'selected' : '' }}>
+                                                            {{ $t->tahun }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>

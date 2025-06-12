@@ -107,4 +107,7 @@ Route::post('/pengaturan', [PengaturanController::class, 'update'])->middleware(
 // Halaman GPS
 Route::get('/gps', [GpsController::class, 'index'])->middleware('auth');
 
+// API untuk mengedit informasi murid
+Route::post('/edit-murid/{murid}', [MuridController::class, 'update'])->middleware('auth');
+
 

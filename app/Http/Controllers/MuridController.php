@@ -101,8 +101,8 @@ class MuridController extends Controller
         // Jika status=1, maka akan lanjut kode di bawah
         // Jika status != 1, maka akan 403 Forbidden
 
-        $kelas = Kelas::get('kelas');
-        $tahun = Tahun::get('tahun');
+        $kelas = Kelas::all();  // Get all columns
+        $tahun = Tahun::all();  // Get all columns
         return view('pages/murid/detail', [
             "title" => "Detail Murid",
             "titlepage" => "Detail Murid",
@@ -111,7 +111,6 @@ class MuridController extends Controller
             "tahun" => $tahun,
             "absensi" => Absensi::latest()->where('murid_id', $murid->id)->limit(30)->get(),
             "qr" => QrCode::size(200)->generate($murid->nis)
-
         ]);
     }
 
@@ -128,7 +127,30 @@ class MuridController extends Controller
      */
     public function update(Request $request, Murid $murid)
     {
-        //
+        // Debug: log all request data
+        \Log::info('Edit Murid Request', $request->all());
+
+        // Verifikasi untuk User yang login apakah dia Admin
+        $verifikasiAdmin = new IsAdmin();
+        $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
+        $validated = $request->validate([
+            'nama' => 'required|min:3|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
+            'tahun_id' => 'required|exists:tahuns,id', // Fixed: table name is tahuns
+        ]);
+
+        try {
+            $murid->nama = $validated['nama'];
+            $murid->kelas_id = $validated['kelas_id'];
+            $murid->tahun_id = $validated['tahun_id'];
+            $murid->save();
+            return redirect()->back()->with('success', 'Data murid berhasil diubah.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('fail', 'Gagal mengubah data murid: ' . $e->getMessage());
+        }
     }
 
     /**
