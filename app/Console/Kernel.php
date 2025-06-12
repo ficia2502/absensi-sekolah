@@ -12,7 +12,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Mark students as absent at 15:00 (3 PM) every weekday
+        $schedule->command('absensi:mark-absent')
+                ->weekdays()
+                ->at('15:00')
+                ->withoutOverlapping() // Prevent multiple runs
+                ->runInBackground()    // Don't block other tasks
+                ->emailOutputOnFailure(env('MAIL_ADMIN_ADDRESS')); // Optional: notify admin on failure
     }
 
     /**
