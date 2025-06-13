@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // Create kelas and tahun first since murids depend on them
         \App\Models\Kelas::factory(1)->create();
         \App\Models\Tahun::create([
-            'tahun' => '2025',
+            'tahun' => '2023',
         ]);
 
         // Now create murids which depend on kelas and tahun
