@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Now create murids which depend on kelas and tahun
-        \App\Models\Murid::factory(50)->create();
+        //\App\Models\Murid::factory(50)->create();
         //\App\Models\Absensi::factory(1000)->create();
 
         // \App\Models\User::factory()->create([
