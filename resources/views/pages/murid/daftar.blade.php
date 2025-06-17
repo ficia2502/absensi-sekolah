@@ -27,53 +27,56 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NIS</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Kelas</th>
-                                        <th>Tahun</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach ($murid as $m)
+                            <!-- Responsive table wrapper -->
+                            <div class="table-responsive">
+                                <table id="example1" class="table table-bordered table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $m->nis }}
-                                            </td>
-                                            <td>{{ $m->nama }}</td>
-                                            @if (empty($m->kelas->kelas))
-                                                <td><i class="text-danger">Kelas tidak di temukan.</i></td>
-                                            @else
-                                                <td><a href="/kelas/daftar/{{ $m->kelas_id }}">{{ $m->kelas->kelas }}</a>
-                                                </td>
-                                            @endif
-                                            <td>{{ $m->tahun->tahun }}</td>
-                                            <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button
-                                                        type="submit" class="btn btn-info">
-                                                        <span>Detail</span>
-                                                    </button></a>
-                                            </td>
+                                            <th>No</th>
+                                            <th>NIS</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Kelas</th>
+                                            <th>Tahun</th>
+                                            <th></th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NIS</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Kelas</th>
-                                        <th>Tahun</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($murid as $m)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $m->nis }}
+                                                </td>
+                                                <td>{{ $m->nama }}</td>
+                                                @if (empty($m->kelas->kelas))
+                                                    <td><i class="text-danger">Kelas tidak di temukan.</i></td>
+                                                @else
+                                                    <td><a href="/kelas/daftar/{{ $m->kelas_id }}">{{ $m->kelas->kelas }}</a>
+                                                    </td>
+                                                @endif
+                                                <td>{{ $m->tahun->tahun }}</td>
+                                                <td class="text-center detail-btn-cell"><a href="/detail-murid/{{ $m->id }}"><button
+                                                            type="submit" class="btn btn-info detail-btn">
+                                                            <span>Detail</span>
+                                                        </button></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIS</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Kelas</th>
+                                            <th>Tahun</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

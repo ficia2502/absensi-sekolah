@@ -12,6 +12,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     {{-- <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css"> --}}
     <!-- Theme style -->
@@ -20,6 +22,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Modern Custom CSS for UI/UX -->
+    <link rel="stylesheet" href="/css/modern-custom.css">
     {{-- <!-- iCheck -->
   <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
@@ -37,7 +41,7 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light shadow-sm animate__animated animate__fadeInDown">
             <!-- Left navbar links -->
             <!-- Top Menu -->
             @include('/partials/topmenu')
@@ -81,9 +85,9 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 animate__animated animate__fadeInLeft">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="/beranda" class="brand-link">
                 <img src="/img/AdminLTELogo.png" alt="Logo Sekolah" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Vibsen</span>
@@ -96,7 +100,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-color: white;">
+    <div class="content-wrapper" style="background-color: white; animation: fadeInUp 0.7s;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -121,7 +125,7 @@
 
 
     <!-- /.content-wrapper -->
-    <footer class="main-footer fixed-bottom">
+    <footer class="main-footer fixed-bottom animate__animated animate__fadeInUp">
         <strong>Copyright &copy; 2025 <a href="#">ficilabs</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
@@ -262,6 +266,22 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+        });
+    </script>
+
+    <!-- Animate On Scroll (AOS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 700, once: true });
+        // Navbar shadow on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 </body>

@@ -60,5 +60,9 @@ class DatabaseSeeder extends Seeder
         //     'jam_absen' => '2023-05-12 01:00:00',
         //     'hadir' => '1'
         // ]);
+
+        $this->call([
+            AdminUserSeeder::class,
+        ]);
     }
 }
