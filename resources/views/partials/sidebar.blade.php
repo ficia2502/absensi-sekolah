@@ -41,6 +41,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/absensi/hari-ini" class="nav-link {{ $title === 'Absensi Hari Ini' ? 'active' : '' }}">
+                    <i class="bi bi-calendar-check"></i>
+                    <p class="pl-1">
+                        Absensi Hari Ini
+                    </p>
+                </a>
+            </li>
             @can('admin')
                 <li
                     class="nav-item {{ $title === 'Daftar Murid' ? 'menu-open' : '' }}{{ $title === 'Input Murid' ? 'menu-open' : '' }}{{ $title === 'Detail Murid' ? 'menu-open' : '' }}">

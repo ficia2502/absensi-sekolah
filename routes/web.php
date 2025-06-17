@@ -10,6 +10,7 @@ use App\Http\Controllers\TahunController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\AbsensiHariIniController;
 
 
 /*
@@ -34,6 +35,12 @@ Route::post('/keluar', [LoginController::class, 'logout']);
 
 // Menuju Halaman Beranda
 Route::get('/beranda', [DashboardController::class, 'index'])->middleware('auth');
+
+// Menuju Halaman Absensi Hari Ini
+Route::get('/absensi/hari-ini', [AbsensiHariIniController::class, 'index'])->middleware('auth')->name('absensi.hari_ini');
+Route::post('/absensi/update-status/{id}', [AbsensiHariIniController::class, 'updateStatus'])->middleware('auth')->name('absensi.update_status');
+Route::get('/absensi/create', [AbsensiHariIniController::class, 'create'])->middleware('auth')->name('absensi.create');
+Route::post('/absensi/store', [AbsensiHariIniController::class, 'store'])->middleware('auth')->name('absensi.store');
 
 // Menuju Halaman Scan QR
 Route::get('/scan-qr', [AbsensiController::class, 'index'])->middleware('auth');
